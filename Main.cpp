@@ -2,7 +2,7 @@
 #include "ArithmeticCalculator.h"
 #include "ArmitheticCalculatorTestBase.h"
 
-#define TEST true
+#define TEST false
 
 using namespace std;
 
