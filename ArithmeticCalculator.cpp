@@ -4,11 +4,11 @@
 #include "PostficCalculator.h"
 
 double ArithmeticCalculator::Solve(char* equation) {
-	SyntaxParser* parser = new SyntaxParser(equation);
+	SyntaxParser* parser = new SyntaxParser();
 	PostfixConvertor* postfixConverter = new PostfixConvertor();
 	PostfixCalculator* postfixCalculator = new PostfixCalculator();
 
-	LinkedList<FormulaItem*>* formulaList = parser->ParseExpression();
+	LinkedList<FormulaItem*>* formulaList = parser->ParseExpression(equation);
 
 	Stack<FormulaItem*>* postfixStack = postfixConverter->CreatePostfixStack(formulaList);
 

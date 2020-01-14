@@ -4,8 +4,7 @@
 
 using namespace std;
 
-SyntaxParser::SyntaxParser(string input) {
-	_input = input;
+SyntaxParser::SyntaxParser() {
 	_parsedExpression = new LinkedList<FormulaItem*>();
 	_current = 0;
 }
@@ -122,7 +121,9 @@ void SyntaxParser::ParseNumber() {
 	delete buffer;
 }
 
-LinkedList<FormulaItem*>* SyntaxParser::ParseExpression() {
+LinkedList<FormulaItem*>* SyntaxParser::ParseExpression(string input) {
+	_input = input;
+
 	while (true) {
 		char c = GetNextChar();
 

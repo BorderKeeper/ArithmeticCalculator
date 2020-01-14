@@ -17,7 +17,7 @@ private:
 	void ParseText();
 	void ParseNumber();
 public:
-	SyntaxParser(string input);
+	SyntaxParser();
 	~SyntaxParser();
-	LinkedList<FormulaItem*>* ParseExpression();
+	LinkedList<FormulaItem*>* ParseExpression(string input);
 };
