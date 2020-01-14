@@ -14,28 +14,6 @@ Stack<FormulaItem*>* PostfixConvertor::CreatePostfixStack(LinkedList<FormulaItem
 		}
 		else if (item->IsProcessable()) {
 
-			//If encounter a function formula push it with its parameters straight to output ignoring parenthesis
-			//Ignore negation since it can be processed normally as its not called with parenthesis
-			if (item->FormulaType == FormulaType::Function && item->SelectedFunction != Negation) {
-				FormulaItem* function = item;
-
-				formulaList->MoveNext();
-				while (!item->IsRightParenthesis()) {
-					item = formulaList->GetCurrent();
-
-					if (item->FormulaType != FormulaType::Parenthesis) {
-						outputStack->Push(item);
-					}
-					
-					formulaList->MoveNext();
-				}
-
-				//push function at the end
-				outputStack->Push(function);
-
-				continue;
-			}
-
 			//Pop the stack until you find a symbol of lower priority number than the current one. 
 			//An incoming left parenthesis will be considered to have higher priority than any other symbol. 
 			//A left parenthesis on the stack will not be removed unless an incoming right parenthesis is found. 

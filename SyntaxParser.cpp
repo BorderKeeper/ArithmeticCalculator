@@ -19,7 +19,7 @@ bool IsDecimalNumber(char c) {
 }
 
 bool IsSpace(char c) {
-	return c == ' ' || c == '\n' || c == '\n\r' || c == '\r' || c == ',';
+	return c == ' ' || c == '\n' || c == '\n\r' || c == '\r';
 }
 
 bool IsText(char c) {
@@ -88,12 +88,10 @@ void SyntaxParser::ParseText() {
 
 		if (IsText(c)) {
 			buffer->Append(c);
-		}
-		else if (c == '(') {
+		} else if (c == '(') {
 			AppendFunction(_parsedExpression, buffer);
 			break;
-		}
-		else {
+		} else {
 			Exit("Function not followed by open parenthesis");
 		}
 	}
@@ -112,8 +110,7 @@ void SyntaxParser::ParseNumber() {
 
 		if (IsDecimalNumber(c)) {
 			buffer->Append(c);
-		}
-		else {
+		} else {
 			break;
 		}
 	}
@@ -153,6 +150,10 @@ LinkedList<FormulaItem*>* SyntaxParser::ParseExpression() {
 			_parsedExpression->Append(new FormulaItem(OperatorType::Multiplication));
 		} else if (c == '/') {
 			_parsedExpression->Append(new FormulaItem(OperatorType::Division));
+		} else if (c == ',') {
+			//max(1+2,3+4) -> max(1+2)(3+4)
+			_parsedExpression->Append(new FormulaItem(ParenthesisType::Right));
+			_parsedExpression->Append(new FormulaItem(ParenthesisType::Left));
 		} else {
 			Exit("Not recognised character in equation");
 		}		

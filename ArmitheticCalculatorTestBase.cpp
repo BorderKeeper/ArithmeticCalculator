@@ -49,6 +49,8 @@ void ArmitheticCalculatorTest::Run() {
 	testSet->Append({ "cos(2)+(sin(2))+tan(1.4)-1", 5.291 });
 	testSet->Append({ "sqrt(2) + exp(5)", 149.827 });
 	testSet->Append({ "((1+2)*(3+4))/((5+6)*(7-8))", -1.91 });
+	testSet->Append({ "min(1+3,5)", 4 });
+	testSet->Append({ "max((2 + sin(3)) * (min(4,5) + 6) * -7, ((1+2)*(3+4))/((5+6)*(7-8)))", -1.91 });
 
 	testSet->MoveFirst();
 	while (!testSet->AtEnd()) {
